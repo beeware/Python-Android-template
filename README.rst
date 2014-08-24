@@ -21,10 +21,34 @@ If you've done this correctly, a project called ``myproject`` should have a
 directory structure that looks something like::
 
     android/
-        app_packages/
+        libs/
+            ...
+        res/
+            ...
         src/
+            com/
+                example/
+                    myproject/
+                        MainActivity.java
+        AndroidManifest.xml
+        ant.properties
+        build.xml
+        local.properties
+        proguard-project.txt
+        project.properties
 
 You're now ready to build and run your project!
+
+To run the app on your phone, you'll need to plug it in to a USB port,
+and enable debug mode. Then, ``cd`` into the ``android`` directory
+and run the following::
+
+  $ ant debug
+  $ adb install -r bin/MyProject-debug.apk
+  $ adb shell am start -n com.example.myproject/com.example.myproject.MainActivity
+
+you will build, install and run your new Android project on your device.
+
 
 Next steps
 ----------

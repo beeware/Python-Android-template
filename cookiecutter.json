@@ -1,9 +1,10 @@
 {
-    "app_name": "appname",
+    "app_name": "AppName",
     "formal_name": "App Name",
     "dir_name": "android",
     "organization": "Example Corp",
     "organization_id": "com.example",
+    "sdk_dir": "/Users/rkm/tools/adt-bundle-mac-x86_64-20131030/sdk",
     "year": "2014",
     "month": "May"
 }
