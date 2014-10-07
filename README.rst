@@ -66,15 +66,14 @@ and run the following (substituting your project name for ``myproject``)::
 
   $ ant debug
   $ adb install -r bin/myproject-debug.apk
-  $ adb shell am start -n com.example.myproject/org.pybee.rubicon.PythonActivity
+  $ adb shell am start -n com.example.myproject/org.pybee.android.PythonActivity
 
 This will compile, install and run your new Android project on your device.
 
 Note that the ``adb shell am start`` command has two Java path references -
 the first (``com.example.myproject``) is the reference to your project name,
-and should be updated. The second is a reference to the Rubicon support
-libraries that start the Python project; this reference should **not** be
-updated.
+and should be updated. The second is a reference to the support libraries that
+start the Python project; this reference should **not** be updated.
 
 If you want to see the logs produced by this code while it runs, use::
 

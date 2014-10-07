@@ -42,7 +42,7 @@ public class PythonActivity extends Activity
         }
 
         Log.i(TAG, "Starting Python script...");
-        if (Python.run(installPath + "/app/myfirstapp/main.py") != 0) {
+        if (Python.run(installPath + "/app/{{ cookiecutter.app_name }}/main.py") != 0) {
             Log.e(TAG, "Got an error running Python script");
         }
 
