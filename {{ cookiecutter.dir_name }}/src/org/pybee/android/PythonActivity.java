@@ -5,30 +5,44 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
 
-import org.pybee.Python;
+
+import org.pybee.rubicon.Python;
 
 import java.io.File;
 
 public class PythonActivity extends Activity
 {
+    static {
+        System.loadLibrary("python2.7");
+    }
+
     private static String TAG = "Python";
+    public static Activity activity;
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(new LinearLayout(this));
 
-        Assets.unpackPayload(this);
+        activity = this;
+
+        Assets.unpackPayload(this, "python");
+        Assets.unpackPayload(this, "app_packages");
+        Assets.unpackPayload(this, "app");
 
         Log.i(TAG, "Start Python environment...");
-        if (Python.start(getFilesDir().toString()) != 0) {
+        String installPath = getFilesDir().toString();
+        String pythonHome = installPath + "/python";
+        String pythonPath = installPath + "/app:" + installPath + "/app_packages:" + installPath + "/python/lib/python2.7/site-packages";
+        String rubiconLib = getApplicationInfo().nativeLibraryDir + "/librubicon.so";
+
+        if (Python.start(pythonHome, pythonPath, rubiconLib) != 0) {
             Log.e(TAG, "Got an error initializing Python");
         }
 
         Log.i(TAG, "Starting Python script...");
-        if (Python.run("myfirstapp/main.py") != 0) {
+        if (Python.run(installPath + "/app/myfirstapp/main.py") != 0) {
             Log.e(TAG, "Got an error running Python script");
         }
 
@@ -39,6 +53,7 @@ public class PythonActivity extends Activity
     @Override
     public void onDestroy()
     {
+        super.onDestroy();
         Log.i(TAG, "Stopping Python environment...");
         Python.stop();
         Log.i(TAG, "Python environment finalized.");

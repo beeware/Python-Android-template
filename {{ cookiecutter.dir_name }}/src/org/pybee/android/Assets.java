@@ -24,24 +24,28 @@ import org.pybee.tar.TarInputStream;
 public class Assets {
     private static String TAG = "Python";
 
-    public static void unpackPayload(Activity activity) {
+    public static void unpackPayload(Activity activity, String payload) {
         // The version of data in memory and on disk.
         Resources res = activity.getResources();
-        int identifier = res.getIdentifier("payload_timestamp", "string", activity.getPackageName());
+        int identifier = res.getIdentifier(payload + "_payload_timestamp", "string", activity.getPackageName());
         String data_version = res.getString(identifier);
         String disk_version = null;
 
         // If no version, no unpacking is necessary.
         if (data_version == null) {
-            Log.v(TAG, "No payload timestamp provided.");
+            Log.v(TAG, "No payload timestamp available for '" + payload + "'.");
             return;
         }
 
+        File filesDir = activity.getFilesDir();
+        String filesDirName = filesDir.getAbsolutePath();
+
         // Check the current disk version, if any.
-        File target = activity.getFilesDir();
-        String filesDir = target.getAbsolutePath();
-        String disk_version_fn = filesDir + "/payload.version";
-        Log.v(TAG, "Version filename " + disk_version_fn);
+        File payloadDir = new File(activity.getFilesDir(), payload);
+        String payloadDirName = payloadDir.getAbsolutePath();
+
+        String disk_version_fn = payloadDirName + "/.payload.version";
+        Log.v(TAG, payload + " version filename: " + disk_version_fn);
 
         try {
             byte buf[] = new byte[64];
@@ -54,26 +58,26 @@ public class Assets {
             disk_version = "";
         }
 
-        Log.v(TAG, "Data version " + data_version);
-        Log.v(TAG, "Disk version " + disk_version);
+        Log.v(TAG, payload + " data version: " + data_version);
+        Log.v(TAG, payload + " disk version: " + disk_version);
 
         // If the disk data is out of date, extract it and write the
         // version file.
         if (data_version.equals(disk_version)) {
-            Log.v(TAG, "Payload is up to date.");
+            Log.v(TAG, payload + " payload is up to date.");
         } else {
-            Log.v(TAG, "Extracting payload...");
+            Log.v(TAG, "Extracting '" + payload + "' payload...");
 
-            recursiveDelete(target);
-            target.mkdirs();
+            recursiveDelete(payloadDir);
+            payloadDir.mkdirs();
 
-            if (!extractTar(activity, "payload.tgz", target.getAbsolutePath())) {
-                Log.e(TAG, "Could not extract payload.");
+            if (!extractTar(activity, payload + "-payload.tgz", filesDirName)) {
+                Log.e(TAG, "Could not extract payload '" + payload + "'.");
             }
 
             try {
                 // Write .nomedia.
-                new File(target, ".nomedia").createNewFile();
+                new File(payloadDir, ".nomedia").createNewFile();
 
                 // Write version file.
                 FileOutputStream os = new FileOutputStream(disk_version_fn);
