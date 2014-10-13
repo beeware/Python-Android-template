@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="HelloWorld-1.0-custom">
+<project name="{{ cookiecutter.app_name }}-custom">
 
     <!-- Check to see if the Python payload has been modified -->
     <target name="-python-payload-modified">
