@@ -102,8 +102,8 @@ system libraries to draw widgets and respond to screen taps. The support
 libraries you added in step 3 have the `Rubicon`_ Java bridging library pre-
 installed to enable an easy interface with the Android system libraries.
 
-Or, you could use a library like `toga`_ that provides a cross-platform widget
-toolkit that supports Android.
+Alternatively, you could use a library like `toga`_ that provides a cross-platform
+widget toolkit that supports Android.
 
 If you have any external library dependencies (like `toga`_, or anything other
 third-party library), you should install the library code into the
