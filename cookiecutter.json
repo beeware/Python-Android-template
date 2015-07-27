@@ -2,9 +2,8 @@
     "app_name": "appname",
     "formal_name": "App Name",
     "dir_name": "android",
-    "organization": "Example Corp",
-    "organization_id": "com.example",
+    "bundle": "com.example",
     "sdk_dir": "/Users/someone/tools/android-sdk-macosx",
-    "year": "2014",
-    "month": "October"
+    "year": "2015",
+    "month": "July"
 }

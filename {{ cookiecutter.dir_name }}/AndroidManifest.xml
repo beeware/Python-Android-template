@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="{{ cookiecutter.organization_id }}.{{ cookiecutter.app_name }}"
+      package="{{ cookiecutter.bundle }}.{{ cookiecutter.app_name }}"
       android:versionCode="1"
       android:versionName="1.0">
     <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" />
