@@ -54,6 +54,17 @@
             unless="sdk.dir"
     />
 
+    <target name="-pre-compile" description="Compile the Python source to a JAR file">
+        <exec executable="python"
+                failonerror="true">
+            <arg value="-m" />
+            <arg value="voc" />
+            <arg value="src/voctestapp.py" />
+            <arg value="src" />
+            <arg value="bin/classes" />
+        </exec>
+    </target>
+
     <!--
         Import per project custom build rules if present at the root of the project.
         This is the place to put custom intermediary targets such as:

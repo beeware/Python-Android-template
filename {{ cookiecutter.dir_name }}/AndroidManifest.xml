@@ -3,9 +3,9 @@
       package="{{ cookiecutter.bundle }}.{{ cookiecutter.app_name }}"
       android:versionCode="1"
       android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" />
+    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="19" />
     <application android:label="@string/app_name" >
-        <activity android:name="org.pybee.android.PythonActivity"
+        <activity android:name="MainActivity"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
