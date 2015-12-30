@@ -18,8 +18,8 @@ Using this template
 3. `Download the Python Android support package`_. This JAR file should
    be placed in the ``libs`` directory.
 
-   Alternatively, you can download the full `Python-Android-support`_
-   project, and build your own versions of these libraries.
+   Alternatively, you can download the full `VOC`_ project, and build your own
+   versions of these libraries.
 
 If this all worked, a project called ``myproject`` should have a directory
 structure that looks something like::
@@ -30,7 +30,7 @@ structure that looks something like::
         app_packages/
             ...
         libs/
-            ...
+            python-android-3.4.2.b1.jar
         res/
             ...
         src/
@@ -48,7 +48,11 @@ structure that looks something like::
     $ pip install voc
 
 You're now ready to build and run your project! Define a MainActivity
-class in ``app/myproject.py``,
+class in ``app/myproject.py``, and run::
+
+  $ ant debug
+
+in the top level project directory (``android`` by default).
 
 To run the app on your phone, you'll need to plug it in to a USB port,
 and configure your phone for development. The Android developer documentation
@@ -56,10 +60,8 @@ has a full set of instructions:
 
     http://developer.android.com/tools/device.html#setting-up
 
-Then, ``cd`` into the top level project directory (``android`` by default)
-and run the following (substituting your project name for ``myproject``)::
+Then, run the following (substituting your project name for ``myproject``)::
 
-  $ ant debug
   $ adb install -r bin/myproject-debug.apk
   $ adb shell am start -n python.myproject/python.myproject.MainActivity
 
@@ -90,7 +92,7 @@ system libraries to draw widgets and respond to screen taps.
 Alternatively, you could use a library like `toga`_ that provides a cross-platform
 widget toolkit that supports Android.
 
-If you have any external library dependencies (like `toga`_, or anything other
+If you have any external library dependencies (like `toga`_, or any other
 third-party library), you should install the library code into the
 ``app_packages`` directory. This directory is the same as a  ``site_packages``
 directory on a desktop Python install.
@@ -118,6 +120,6 @@ that links in the project source::
         setup.py
 
 .. _cookiecutter: http://github.com/audreyr/cookiecutter
-.. _Download the Python Android support package: https://github.com/pybee/Python-Android-support/releases/download/3.4.2-b1/Python-3.4.2-Android-support.jar
-.. _Python-Android-support: https://github.com/pybee/Python-Android-support
+.. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.4.2-b1/Python-Android-3.4.2.b1.jar
+.. _VOC: https://github.com/pybee/voc
 .. _toga: http://pybee.org/toga
