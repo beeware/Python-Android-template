@@ -1,0 +1,4 @@
+Your application code should be placed in this directory.
+
+The native code will be looking for a MainActivity class defined in a
+{{ cookiecutter.app_name }}.py file as the entry point.
