@@ -54,11 +54,28 @@
             unless="sdk.dir"
     />
 
+    <!-- Compile Python sources into Java class files -->
+    <target name="-voc-compile" description="Compile the Python source to a JAR file">
+        <exec executable="voc"
+                failonerror="true">
+            <arg value="-v" />
+            <arg value="-p" />
+            <arg value="app" />
+            <arg value="-o" />
+            <arg value="bin/classes" />
+            <arg value="app" />
+        </exec>
+    </target>
+
+    <target name="-pre-compile" depends="-voc-compile" />
+
     <!--
         Import per project custom build rules if present at the root of the project.
         This is the place to put custom intermediary targets such as:
             -pre-build
-            -pre-compile
+            -pre-compile  (If you define -pre-compile, make sure you have
+                           -voc-compile as a dependency, or Python sources will not
+                           be compiled)
             -post-compile (This is typically used for code obfuscation.
                            Compiled code location: ${out.classes.absolute.dir}
                            If this is not done in place, override ${out.dex.input.absolute.dir})
@@ -66,11 +83,8 @@
             -post-build
             -pre-clean
     -->
-    <import file="custom_rules.xml" optional="true" />
 
-    <target name="-pre-compile">
-        <antcall target="-voc-compile" />
-    </target>
+    <import file="custom_rules.xml" optional="true" />
 
     <!-- Import the actual build file.
 
