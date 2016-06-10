@@ -120,6 +120,6 @@ that links in the project source::
         setup.py
 
 .. _cookiecutter: http://github.com/audreyr/cookiecutter
-.. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.4.2-b1/Python-Android-3.4.2.b1.tar.gz
+.. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.4.2-b1/Python-Android-3.4.2-b1.tar.gz
 .. _VOC: https://github.com/pybee/voc
 .. _toga: http://pybee.org/toga
