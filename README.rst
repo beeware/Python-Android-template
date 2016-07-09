@@ -3,6 +3,12 @@ Python Android Template
 
 A template for building Python apps that will run under Android.
 
+**This repository branch contains a template for Python 3.4**.
+Other Python versions are available by cloning other branches of repository.
+
+The simplest way to use this template is with `Briefcase`_. However, you can 
+use this template manually if you want.
+
 Using this template
 -------------------
 
@@ -13,7 +19,7 @@ Using this template
 
 2. Run ``cookiecutter`` on the Python-Android template::
 
-    $ cookiecutter https://github.com/pybee/Python-Android-template
+    $ cookiecutter https://github.com/pybee/Python-Android-template --checkout 3.4
 
 3. `Download the Python Android support package`_. This JAR file should
    be placed in the ``libs`` directory.
@@ -21,16 +27,27 @@ Using this template
    Alternatively, you can download the full `VOC`_ project, and build your own
    versions of these libraries.
 
-If this all worked, a project called ``myproject`` should have a directory
-structure that looks something like::
+4. Add your code to the template. At the very minimum, you need to have an
+   ``app/<project name>/app.py`` file that defines a ``MainActivity`` class. 
+   If your code has any dependencies, they should be installed under the 
+   ``app_packages`` directory.
+
+5. Install `voc`, the Python to Java bytecode transpiler::
+
+    $ pip install voc
+
+If you've done this correctly, a project called ``myproject`` should have a
+directory structure that looks something like::
 
     android/
         app/
-            ...
+            myproject/
+                __init__.py
+                app.py
         app_packages/
             ...
         libs/
-            python-android.jar
+            python-android-support.jar
         res/
             ...
         src/
@@ -42,10 +59,6 @@ structure that looks something like::
         LICENSE
         proguard-project.txt
         project.properties
-
-4. Install `voc`, the Python to Java bytecode transpiler::
-
-    $ pip install voc
 
 You're now ready to build and run your project! Define a MainActivity
 class in ``app/myproject.py``, and run::
@@ -63,7 +76,7 @@ has a full set of instructions:
 Then, run the following (substituting your project name for ``myproject``)::
 
   $ adb install -r bin/myproject-debug.apk
-  $ adb shell am start -n python.myproject/python.myproject.MainActivity
+  $ adb shell am start -n python.myproject.app/python.myproject.app.MainActivity
 
 This will compile, install and run your new Android project on your device.
 
@@ -119,7 +132,8 @@ that links in the project source::
             other.py
         setup.py
 
-.. _cookiecutter: http://github.com/audreyr/cookiecutter
-.. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.4.2-b1/Python-Android-3.4.2.b1.tar.gz
-.. _VOC: https://github.com/pybee/voc
-.. _toga: http://pybee.org/toga
+.. _Briefcase: https://github.com/pybee/briefcase
+.. _cookiecutter: https://github.com/audreyr/cookiecutter
+.. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.4.2-b1/Python-3.4-Android-support.b1.tar.gz
+.. _VOC: http://pybee.org/project/projects/bridges/voc
+.. _toga: http://pybee.org/project/projects/libraries/toga
