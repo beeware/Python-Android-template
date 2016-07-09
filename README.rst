@@ -6,7 +6,7 @@ A template for building Python apps that will run under Android.
 **This repository branch contains a template for Python 3.4**.
 Other Python versions are available by cloning other branches of repository.
 
-The simplest way to use this template is with `Briefcase`_. However, you can 
+The simplest way to use this template is with `Briefcase`_. However, you can
 use this template manually if you want.
 
 Using this template
@@ -28,22 +28,28 @@ Using this template
    versions of these libraries.
 
 4. Add your code to the template. At the very minimum, you need to have an
-   ``app/<project name>/app.py`` file that defines a ``MainActivity`` class. 
-   If your code has any dependencies, they should be installed under the 
+   ``app/<project name>/app.py`` file that defines a subclass of
+   ``android.app.Activity`` whose name is the same as the project's formal name,
+   but with non-alphanumeric characters removed. For example, a project with a
+   formal name of ``My Super-Project`` requires an ``Activity`` subclass
+   called ``MySuperProject``.
+
+   If your code has any dependencies, they should be installed under the
    ``app_packages`` directory.
 
 5. Install `voc`, the Python to Java bytecode transpiler::
 
     $ pip install voc
 
-If you've done this correctly, a project called ``myproject`` should have a
-directory structure that looks something like::
+If you've done this correctly, a project with a formal name of ``My Project``,
+with an app name of ```myproject`` should have a directory structure that
+looks something like::
 
     android/
         app/
             myproject/
                 __init__.py
-                app.py
+                app.py (contains class ``MyProject``)
         app_packages/
             ...
         libs/
