@@ -3,7 +3,7 @@ Python Android Template
 
 A template for building Python apps that will run under Android.
 
-**This repository branch contains a template for Python 3.4**.
+**This repository branch contains a template for Python 3.5**.
 Other Python versions are available by cloning other branches of repository.
 
 The simplest way to use this template is with `Briefcase`_. However, you can
@@ -19,7 +19,7 @@ Using this template
 
 2. Run ``cookiecutter`` on the Python-Android template::
 
-    $ cookiecutter https://github.com/pybee/Python-Android-template --checkout 3.4
+    $ cookiecutter https://github.com/pybee/Python-Android-template --checkout 3.5
 
 3. `Download the Python Android support package`_. This JAR file should
    be placed in the ``libs`` directory.
@@ -140,6 +140,6 @@ that links in the project source::
 
 .. _Briefcase: https://github.com/pybee/briefcase
 .. _cookiecutter: https://github.com/audreyr/cookiecutter
-.. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.4.2-b1/Python-3.4-Android-support.b1.tar.gz
+.. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.5.2-b1/Python-3.5-Android-support.b1.tar.gz
 .. _VOC: http://pybee.org/project/projects/bridges/voc
 .. _toga: http://pybee.org/project/projects/libraries/toga
