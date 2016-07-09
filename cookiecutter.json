@@ -4,5 +4,7 @@
     "dir_name": "android",
     "bundle": "com.example",
     "year": "2016",
-    "month": "Jan"
+    "month": "Jan",
+    "version": "1.0",
+    "version_code": "1"
 }
