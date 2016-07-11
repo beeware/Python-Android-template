@@ -28,11 +28,12 @@ Using this template
    versions of these libraries.
 
 4. Add your code to the template. At the very minimum, you need to have an
-   ``app/<project name>/app.py`` file that defines a subclass of
+   ``app/<app name>/app.py`` file that defines a subclass of
    ``android.app.Activity`` whose name is the same as the project's formal name,
    but with non-alphanumeric characters removed. For example, a project with a
    formal name of ``My Super-Project`` requires an ``Activity`` subclass
-   called ``MySuperProject``.
+   called ``MySuperProject``. If ``<app name>`` contains a dash, it will be
+   converted to an underscore in the expected package name
 
    If your code has any dependencies, they should be installed under the
    ``app_packages`` directory.
@@ -42,12 +43,12 @@ Using this template
     $ pip install voc
 
 If you've done this correctly, a project with a formal name of ``My Project``,
-with an app name of ```myproject`` should have a directory structure that
+with an app name of ```my-project`` should have a directory structure that
 looks something like::
 
     android/
         app/
-            myproject/
+            my_project/
                 __init__.py
                 app.py (contains class ``MyProject``)
         app_packages/
