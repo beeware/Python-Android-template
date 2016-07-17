@@ -12,6 +12,13 @@ use this template manually if you want.
 Using this template
 -------------------
 
+The easiest way to use this project is to not use it at all - at least,
+not directly. `Briefcase <https://github.com/pybee/briefcase/>`__ is a
+tool that uses this template, rolling it out using data extracted from
+your ``setup.py``.
+
+However, if you *do* want use this template directly...
+
 1. Install `cookiecutter`_. This is a tool used to bootstrap complex project
    templates::
 
