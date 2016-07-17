@@ -6,9 +6,6 @@ A template for building Python apps that will run under Android.
 **This repository branch contains a template for Python 3.5**.
 Other Python versions are available by cloning other branches of repository.
 
-The simplest way to use this template is with `Briefcase`_. However, you can
-use this template manually if you want.
-
 Using this template
 -------------------
 
@@ -146,7 +143,6 @@ that links in the project source::
             other.py
         setup.py
 
-.. _Briefcase: https://github.com/pybee/briefcase
 .. _cookiecutter: https://github.com/audreyr/cookiecutter
 .. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.5.2-b1/Python-3.5-Android-support.b1.tar.gz
 .. _VOC: http://pybee.org/project/projects/bridges/voc
