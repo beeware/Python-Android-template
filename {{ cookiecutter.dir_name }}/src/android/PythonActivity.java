@@ -29,7 +29,7 @@ public class PythonActivity extends Activity {
             });
 
             if (_app == null) {
-                Log.e("Python", "{{ cookiecutter.app_name }} didn't configure an app reference.");
+                Log.w("Python", "{{ cookiecutter.app_name }} didn't configure an app reference.");
             } else {
                 _app.__setattr_null("_impl", new org.python.java.Object(this));
             }
@@ -54,9 +54,11 @@ public class PythonActivity extends Activity {
                 java.util.Map<java.lang.String, org.python.Object> kwargs
             ) {
         if (_app == null) {
-            Log.e("Python", "{{ cookiecutter.app_name }} didn't configure an app reference at creation.");
+            Log.e("Python", "Can't perform " + method_name +
+                ": {{ cookiecutter.app_name }} didn't configure an app reference at creation.");
         } else {
             try {
+                Log.i("Python", "Activity " + method_name);
                 org.python.Object method = _app.__getattribute_null(method_name);
                 if (method != null) {
                     ((org.python.Callable) method).invoke(args, kwargs);
@@ -72,42 +74,36 @@ public class PythonActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        Log.i("Python", "onStart");
         this.invoke_app_method("onStart", null, null);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.i("Python", "onResume");
         this.invoke_app_method("onResume", null, null);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.i("Python", "onPause");
         this.invoke_app_method("onPause", null, null);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.i("Python", "onStop");
         this.invoke_app_method("onStop", null, null);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i("Python", "onDestroy");
         this.invoke_app_method("onDestroy", null, null);
     }
 
     @Override
     public void onRestart() {
         super.onRestart();
-        Log.i("Python", "onRestart");
         this.invoke_app_method("onRestart", null, null);
     }
 }
