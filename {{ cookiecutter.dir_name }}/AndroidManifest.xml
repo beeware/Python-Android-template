@@ -7,7 +7,7 @@
     <application
           android:label="@string/app_name"
           android:icon="@drawable/icon">
-        <activity android:name="python.PythonActivity"
+        <activity android:name="android.PythonActivity"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
