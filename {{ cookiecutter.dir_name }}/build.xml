@@ -60,6 +60,15 @@
                 failonerror="true">
             <arg value="-v" />
             <arg value="-p" />
+            <arg value="app_packages" />
+            <arg value="-o" />
+            <arg value="bin/classes" />
+            <arg value="app_packages" />
+        </exec>
+        <exec executable="voc"
+                failonerror="true">
+            <arg value="-v" />
+            <arg value="-p" />
             <arg value="app" />
             <arg value="-o" />
             <arg value="bin/classes" />
