@@ -54,7 +54,7 @@ looks something like::
         app/
             my_project/
                 __init__.py
-                app.py (contains class ``MyProject``)
+                app.py
         app_packages/
             ...
         libs/
@@ -71,8 +71,38 @@ looks something like::
         proguard-project.txt
         project.properties
 
-You're now ready to build and run your project! Define a MainActivity
-class in ``app/myproject.py``, and run::
+The contents of `app.py` needs to do two things:
+
+1. Construct an instance of a class that can be notified when key events
+   in the Android activity lifecycle occur::
+
+   * ``onStart()``
+   * ``onResume()``
+   * ``onPause()``
+   * ``onStop()``
+   * ``onDestroy()``
+   * ``onRestart()``
+
+2. Register this instance with the ``PythonActivity`` by calling
+   ``PythonActivity.setListener()``. This method will return the
+   Activity instance for the app.
+
+The following would be a simple example of an ``app.py`` that could be used::
+
+    from android import PythonActiity
+
+
+    class MyApplication:
+        def onStart(self):
+            print("Application starting up")
+
+
+    app = MyApplication()
+
+    activity = PythonActivity.setApp(app)
+
+
+You're now ready to build and run your project!
 
   $ ant debug
 
@@ -84,24 +114,26 @@ has a full set of instructions:
 
     http://developer.android.com/tools/device.html#setting-up
 
-Then, run the following (substituting your project name for ``myproject``)::
+Then, run the following (substituting your project name for ``myproject``,
+and your bundle identifier as ``com.example``)::
 
   $ adb install -r bin/myproject-debug.apk
-  $ adb shell am start -n python.myproject.app/python.myproject.app.MainActivity
+  $ adb shell am start -n com.example.myproject/android.PythonActivity
 
 This will compile, install and run your new Android project on your device.
 
 If you want to see the logs produced by this code while it runs, use::
 
-  $ adb logcat VOC:* *:E DEBUG:*
+  $ adb logcat Python:* *:E DEBUG:*
 
 This will output:
 
-* All the log messages produced by Python code
+* All the log messages produced by Python code, including all content printed
+  to stdout and stderr
 
-* All ERROR level log messages
+* All ``ERROR`` level log messages
 
-* Any message produced by the DEBUG crash reporting system.
+* Any message produced by the ``DEBUG`` crash reporting system.
 
 Next steps
 ----------
@@ -144,6 +176,6 @@ that links in the project source::
         setup.py
 
 .. _cookiecutter: https://github.com/audreyr/cookiecutter
-.. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.4.2-b1/Python-3.4-Android-support.b1.tar.gz
+.. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.4.2-b1/Python-3.4-Android-support.b2.tar.gz
 .. _VOC: http://pybee.org/project/projects/bridges/voc
 .. _toga: http://pybee.org/project/projects/libraries/toga

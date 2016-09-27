@@ -6,15 +6,24 @@ import android.util.Log;
 
 
 public class PythonActivity extends Activity {
-    static org.python.Object _app;
+    static android.app.Activity instance;
+    static org.python.Object _listener;
 
-    static public void setApp(org.python.Object app) {
-        _app = app;
+    /**
+     * Set the object that will receive native application events
+     *
+     * Returns the activity instance.
+     */
+    static public android.app.Activity setListener(org.python.Object listener) {
+        _listener = listener;
+        return instance;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // There will only be one instance of this activity; store it.
+        this.instance = this;
         Log.i("Python", "Starting Python app...");
         try {
             // Load the app module
@@ -28,10 +37,10 @@ public class PythonActivity extends Activity {
                 new java.lang.String [] {"{{ cookiecutter.app_name }}"}
             });
 
-            if (_app == null) {
-                Log.w("Python", "{{ cookiecutter.app_name }} didn't configure an app reference.");
+            if (_listener == null) {
+                Log.w("Python", "{{ cookiecutter.app_name }} didn't configure a listener.");
             } else {
-                _app.__setattr_null("_impl", new org.python.java.Object(this));
+                _listener.__setattr_null("_impl", new org.python.java.Object(this));
             }
             Log.d("Python", "Python app started.");
         } catch (java.lang.ClassNotFoundException e) {
@@ -41,7 +50,19 @@ public class PythonActivity extends Activity {
         } catch (java.lang.IllegalAccessException e) {
             Log.e("Python", "Couldn't access main method.");
         } catch (java.lang.reflect.InvocationTargetException e) {
-            Log.e("Python", "Couldn't invoke main method.");
+            try {
+                // e.getTargetException().printStackTrace();
+                // If the Java method raised an Python exception, re-raise that
+                // exception as-is. If it wasn"t a Python exception, wrap it
+                // as one and continue.
+                throw (org.python.exceptions.BaseException) e.getCause();
+            } catch (ClassCastException java_e) {
+                java.lang.String message = e.getCause().getMessage();
+                if (message == null) {
+                    message = e.getCause().getClass().getName();
+                }
+                throw new org.python.exceptions.RuntimeError(message);
+            }
         }
     }
 
@@ -53,17 +74,17 @@ public class PythonActivity extends Activity {
                 org.python.Object [] args,
                 java.util.Map<java.lang.String, org.python.Object> kwargs
             ) {
-        if (_app == null) {
+        if (_listener == null) {
             Log.e("Python", "Can't perform " + method_name +
-                ": {{ cookiecutter.app_name }} didn't configure an app reference at creation.");
+                ": {{ cookiecutter.app_name }} didn't configure a listener at creation.");
         } else {
             try {
                 Log.i("Python", "Activity " + method_name);
-                org.python.Object method = _app.__getattribute_null(method_name);
+                org.python.Object method = _listener.__getattribute_null(method_name);
                 if (method != null) {
                     ((org.python.Callable) method).invoke(args, kwargs);
                 } else {
-                    Log.d("Python", "No " + method_name + " method on Python app.");
+                    Log.d("Python", "No " + method_name + " method on Python listener.");
                 }
             } catch (java.lang.ClassCastException e) {
                 Log.e("Python", method_name + " method isn't callable");
