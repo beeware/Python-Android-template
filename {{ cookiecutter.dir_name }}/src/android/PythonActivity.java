@@ -3,9 +3,10 @@ package android;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 
 
-public class PythonActivity extends Activity {
+public class PythonActivity extends AppCompatActivity {
     static android.app.Activity instance;
     static org.python.Object _listener;
 
@@ -79,7 +80,7 @@ public class PythonActivity extends Activity {
                 ": {{ cookiecutter.app_name }} didn't configure a listener at creation.");
         } else {
             try {
-                Log.i("Python", "Activity " + method_name);
+                Log.i("Python", "Invoking " + method_name + " method on Python listener.");
                 org.python.Object method = _listener.__getattribute_null(method_name);
                 if (method != null) {
                     ((org.python.Callable) method).invoke(args, kwargs);
@@ -90,6 +91,7 @@ public class PythonActivity extends Activity {
                 Log.e("Python", method_name + " method isn't callable");
             }
         }
+        this.invoke_app_method("onCreate", null, null);
     }
 
     @Override
