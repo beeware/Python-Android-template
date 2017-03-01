@@ -65,6 +65,7 @@ public class PythonActivity extends AppCompatActivity {
                 throw new org.python.exceptions.RuntimeError(message);
             }
         }
+        this.invoke_app_method("onCreate", null, null);
     }
 
     /**
@@ -91,7 +92,6 @@ public class PythonActivity extends AppCompatActivity {
                 Log.e("Python", method_name + " method isn't callable");
             }
         }
-        this.invoke_app_method("onCreate", null, null);
     }
 
     @Override
