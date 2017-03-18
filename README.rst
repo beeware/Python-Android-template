@@ -57,6 +57,10 @@ looks something like::
                 app.py
         app_packages/
             ...
+        buildSrc/
+            ...
+        gradle/
+            ...
         libs/
             python-android-support.jar
         res/
@@ -65,8 +69,8 @@ looks something like::
             ...
         AndroidManifest.xml
         build.gradle
-        buildSrc/
-            ...
+        gradlew
+        gradlew.bat
         LICENSE
 
 The contents of `app.py` needs to do two things:
@@ -102,7 +106,7 @@ The following would be a simple example of an ``app.py`` that could be used::
 
 You're now ready to build and run your project!
 
-  $ ./gradlew build vocBuild
+  $ ./gradlew build
 
 in the top level project directory (``android`` by default).
 
@@ -114,8 +118,7 @@ has a full set of instructions:
 
 Then, run the following::
 
-  $ ./gradlew installDebug
-  $ ./gradlew runAndroidApp
+  $ ./gradlew run
 
 This will compile, install and run your new Android project on your device.
 
