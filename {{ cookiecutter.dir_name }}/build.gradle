@@ -8,12 +8,31 @@ buildscript {
     }
 }
 
-apply plugin: 'com.android.application'
-apply plugin: PythonPlugin
-
-python {
-    namespace = '{{ cookiecutter.bundle }}.{{ cookiecutter.app_name }}'
+task buildPythonDebug << {
+    exec {
+        commandLine "voc -v -p app -o build/intermediates/classes/debug app".split()
+    }
+    exec {
+        commandLine "voc -v -p app_packages -o build/intermediates/classes/debug app_packages".split()
+    }
 }
+
+task buildPythonRelease << {
+    exec {
+        commandLine "voc -v -p app -o build/intermediates/classes/release app".split()
+    }
+    exec {
+        commandLine "voc -v -p app_packages -o build/intermediates/classes/release app_packages".split()
+    }
+}
+
+task run << {
+    exec {
+        commandLine "adb shell am start -n {{ cookiecutter.bundle }}.{{ cookiecutter.app_name }}/android.PythonActivity".split()
+    }
+}
+
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
