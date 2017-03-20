@@ -57,6 +57,8 @@ looks something like::
                 app.py
         app_packages/
             ...
+        gradle/
+            ...
         libs/
             python-android-support.jar
         res/
@@ -64,12 +66,10 @@ looks something like::
         src/
             ...
         AndroidManifest.xml
-        ant.properties
-        build.xml
-        local.properties
+        build.gradle
+        gradlew
+        gradlew.bat
         LICENSE
-        proguard-project.txt
-        project.properties
 
 The contents of `app.py` needs to do two things:
 
@@ -89,7 +89,7 @@ The contents of `app.py` needs to do two things:
 
 The following would be a simple example of an ``app.py`` that could be used::
 
-    from android import PythonActiity
+    from android import PythonActivity
 
 
     class MyApplication:
@@ -99,12 +99,12 @@ The following would be a simple example of an ``app.py`` that could be used::
 
     app = MyApplication()
 
-    activity = PythonActivity.setApp(app)
+    activity = PythonActivity.setListener(app)
 
 
 You're now ready to build and run your project!
 
-  $ ant debug
+  $ ./gradlew build
 
 in the top level project directory (``android`` by default).
 
@@ -114,11 +114,9 @@ has a full set of instructions:
 
     http://developer.android.com/tools/device.html#setting-up
 
-Then, run the following (substituting your project name for ``myproject``,
-and your bundle identifier as ``com.example``)::
+Then, run the following::
 
-  $ adb install -r bin/myproject-debug.apk
-  $ adb shell am start -n com.example.myproject/android.PythonActivity
+  $ ./gradlew run
 
 This will compile, install and run your new Android project on your device.
 
