@@ -6,7 +6,7 @@
         android:label="@string/app_name"
         android:icon="@drawable/icon">
         <activity
-            android:name="android.{{ cookiecutter.class_name }}“
+            android:name="android.{{ cookiecutter.class_name }}"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
