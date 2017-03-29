@@ -28,7 +28,7 @@ task buildPythonRelease << {
 
 task run << {
     exec {
-        commandLine "adb shell am start -n {{ cookiecutter.bundle }}.{{ cookiecutter.app_name }}/android.{{ cookiecutter.class_name }}“.split()
+        commandLine "adb shell am start -n {{ cookiecutter.bundle }}.{{ cookiecutter.app_name }}/android.{{ cookiecutter.class_name }}".split()
     }
 }
 
