@@ -175,6 +175,6 @@ that links in the project source::
         setup.py
 
 .. _cookiecutter: https://github.com/audreyr/cookiecutter
-.. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.5.2-b3/Python-3.5-Android-support.b1.tar.gz
+.. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.5-b3/Python-3.5-Android-support.b3.tar.gz
 .. _VOC: http://pybee.org/project/projects/bridges/voc
 .. _toga: http://pybee.org/project/projects/libraries/toga
