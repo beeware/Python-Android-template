@@ -5,3 +5,4 @@ bin
 gen
 local
 local.properties
+.gradle

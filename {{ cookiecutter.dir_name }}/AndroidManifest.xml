@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="{{ cookiecutter.bundle }}.{{ cookiecutter.app_name }}"
-      android:versionCode="{{ cookiecutter.version_code }}"
-      android:versionName="{{ cookiecutter.version }}">
-    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="19" />
+    package="{{ cookiecutter.bundle }}.{{ cookiecutter.app_name }}">
     <application
-          android:label="@string/app_name"
-          android:icon="@drawable/icon">
-        <activity android:name="android.PythonActivity"
-                  android:label="@string/app_name">
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:icon="@drawable/icon">
+        <activity
+            android:name="android.{{ cookiecutter.class_name }}“
+            android:label="@string/app_name"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="android.PythonActivity"
+            android:theme="@style/AppTheme"/>
     </application>
 </manifest>

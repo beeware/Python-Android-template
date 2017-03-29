@@ -1,0 +1,65 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.0'
+    }
+}
+
+task buildPythonDebug << {
+    exec {
+        commandLine "voc -v -p app -o build/intermediates/classes/debug app".split()
+    }
+    exec {
+        commandLine "voc -v -p app_packages -o build/intermediates/classes/debug app_packages".split()
+    }
+}
+
+task buildPythonRelease << {
+    exec {
+        commandLine "voc -v -p app -o build/intermediates/classes/release app".split()
+    }
+    exec {
+        commandLine "voc -v -p app_packages -o build/intermediates/classes/release app_packages".split()
+    }
+}
+
+task run << {
+    exec {
+        commandLine "adb shell am start -n {{ cookiecutter.bundle }}.{{ cookiecutter.app_name }}/android.{{ cookiecutter.class_name }}“.split()
+    }
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            res.srcDirs = ['res']
+        }
+    }
+}
+
+project.afterEvaluate {
+    packageDebug.dependsOn buildPythonDebug
+    packageRelease.dependsOn buildPythonRelease
+    run.dependsOn installDebug
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.1.1'
+}
