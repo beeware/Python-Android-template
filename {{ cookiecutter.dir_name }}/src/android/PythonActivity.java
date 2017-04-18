@@ -27,15 +27,16 @@ public class PythonActivity extends AppCompatActivity {
         this.instance = this;
         Log.i("Python", "Starting Python app...");
         try {
-            // Load the app module
-            java.lang.Class app_module = java.lang.Class.forName("python.{{ cookiecutter.app_name }}.app.__init__");
+            // Load the app's __main__ module
+            java.lang.Class app_module = java.lang.Class.forName("python.f2c.__main__.__init__");
 
-            // Find the main method in the app module...
+            // Find the Java main method (i.e., "public static void main(String [] args)")
+            // in the app's __main__ module...
             java.lang.reflect.Method main = app_module.getMethod("main", java.lang.String[].class);
 
             // ... and invoke it.
             main.invoke(null, new java.lang.Object [] {
-                new java.lang.String [] {"{{ cookiecutter.app_name }}"}
+                new java.lang.String [] {"f2c"}
             });
 
             if (_listener == null) {
@@ -52,7 +53,11 @@ public class PythonActivity extends AppCompatActivity {
             Log.e("Python", "Couldn't access main method.");
         } catch (java.lang.reflect.InvocationTargetException e) {
             try {
-                // e.getTargetException().printStackTrace();
+                // org.Python.debug("Exception:", e.getTargetException());
+                // for (java.lang.StackTraceElement ste: e.getTargetException().getStackTrace()) {
+                //     org.Python.debug("     ", ste);
+                // }
+
                 // If the Java method raised an Python exception, re-raise that
                 // exception as-is. If it wasn"t a Python exception, wrap it
                 // as one and continue.
