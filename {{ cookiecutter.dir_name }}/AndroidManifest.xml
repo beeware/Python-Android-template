@@ -16,6 +16,7 @@
         </activity>
         <activity
             android:name="android.PythonActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppTheme"/>
     </application>
 </manifest>
