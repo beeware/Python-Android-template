@@ -2,6 +2,7 @@ package android;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.support.v7.app.AppCompatActivity;
 
@@ -25,10 +26,17 @@ public class PythonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // There will only be one instance of this activity; store it.
         this.instance = this;
+
+        // Establish the scale factor
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        this.device_scale = metrics.density;
+        Log.i("Python", "Device scale factor = " + this.device_scale);
+
         Log.i("Python", "Starting Python app...");
         try {
             // Load the app's __main__ module
-            java.lang.Class app_module = java.lang.Class.forName("python.f2c.__main__.__init__");
+            java.lang.Class app_module = java.lang.Class.forName("python.f2c.__main__");
 
             // Find the Java main method (i.e., "public static void main(String [] args)")
             // in the app's __main__ module...
