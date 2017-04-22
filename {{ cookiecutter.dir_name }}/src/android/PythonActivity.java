@@ -21,6 +21,8 @@ public class PythonActivity extends AppCompatActivity {
         return instance;
     }
 
+    public float device_scale = 1.0f;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
