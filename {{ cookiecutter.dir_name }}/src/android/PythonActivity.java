@@ -38,7 +38,7 @@ public class PythonActivity extends AppCompatActivity {
         Log.i("Python", "Starting Python app...");
         try {
             // Load the app's __main__ module
-            java.lang.Class app_module = java.lang.Class.forName("python.f2c.__main__");
+            java.lang.Class app_module = java.lang.Class.forName("python.{{ cookiecutter.app_name }}.__main__");
 
             // Find the Java main method (i.e., "public static void main(String [] args)")
             // in the app's __main__ module...
@@ -46,7 +46,7 @@ public class PythonActivity extends AppCompatActivity {
 
             // ... and invoke it.
             main.invoke(null, new java.lang.Object [] {
-                new java.lang.String [] {"f2c"}
+                new java.lang.String [] {"{{ cookiecutter.app_name }}"}
             });
 
             if (_listener == null) {
