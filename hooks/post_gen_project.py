@@ -13,5 +13,5 @@ for lib in libs:
     copyfile(path_lib, destiny_lib)
     print(' * Lib {} imported to android/libs/'.format(lib))
 
-print(' * All libs is already imported')
+print(' * All libs are already imported')
 
