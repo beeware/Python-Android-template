@@ -1,17 +1,21 @@
 from shutil import copyfile
-from os import listdir
+import os
 
-base_path_libs = '../libs'
+base_path = os.path.split(os.getcwd())[0]
+base_path_libs = os.path.join(base_path, 'libs')
+target_path_libs = os.path.join(os.getcwd(), 'libs')
 
-alldir = listdir(base_path_libs)
-
-libs = list(filter(lambda x: x.endswith('.jar'), alldir))
+try:
+    alldir = os.listdir(base_path_libs)
+    libs = filter(lambda x: x.endswith('.jar'), alldir)
+except:
+    libs = []
 
 for lib in libs:
-    path_lib = base_path_libs +'/'+ lib
-    destiny_lib = './libs/' + lib
-    copyfile(path_lib, destiny_lib)
-    print(' * Lib {} imported to android/libs/'.format(lib))
+    base_path_lib = os.path.join(base_path_libs, lib)
+    target_path_lib = os.path.join(target_path_libs, lib)
+    copyfile(base_path_lib, target_path_lib)
+    print(' * Lib {} copied to android/libs/'.format(lib))
 
-print(' * All libs are already imported')
+print(' * All libs are already copied')
 
