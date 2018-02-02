@@ -1,6 +1,8 @@
 from shutil import copyfile
+import glob
 import os
 
+"""
 base_path = os.path.split(os.getcwd())[0]
 base_path_libs = os.path.join(base_path, 'libs')
 target_path_libs = os.path.join(os.getcwd(), 'libs')
@@ -16,6 +18,11 @@ for lib in libs:
     target_path_lib = os.path.join(target_path_libs, lib)
     copyfile(base_path_lib, target_path_lib)
     print(' * Lib {} copied to android/libs/'.format(lib))
+    """
+
+for src in glob.glob('../libs/*.jar'):
+    dest = os.path.join('libs', os.path.basename(src))
+    copyfile(src, dest)
 
 print(' * All libs are already copied')
 
