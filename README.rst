@@ -3,7 +3,7 @@ Python Android Template
 
 A template for building Python apps that will run under Android.
 
-**This repository branch contains a template for Python 3.5**.
+**This repository branch contains a template for Python 3.6**.
 Other Python versions are available by cloning other branches of repository.
 
 Using this template
@@ -23,7 +23,7 @@ However, if you *do* want use this template directly...
 
 2. Run ``cookiecutter`` on the Python-Android template::
 
-    $ cookiecutter https://github.com/pybee/Python-Android-template --checkout 3.5
+    $ cookiecutter https://github.com/pybee/Python-Android-template --checkout 3.6
 
 3. `Download the Python Android support package`_. This JAR file should
    be placed in the ``libs`` directory.
@@ -175,6 +175,6 @@ that links in the project source::
         setup.py
 
 .. _cookiecutter: https://github.com/audreyr/cookiecutter
-.. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.5-b3/Python-3.5-Android-support.b3.tar.gz
+.. _Download the Python Android support package: https://github.com/pybee/voc/releases/download/3.6-b3/Python-3.6-Android-support.b3.tar.gz
 .. _VOC: http://pybee.org/project/projects/bridges/voc
 .. _toga: http://pybee.org/project/projects/libraries/toga
