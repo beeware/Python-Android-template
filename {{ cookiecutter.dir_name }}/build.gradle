@@ -10,6 +10,8 @@ buildscript {
 }
 
 task buildPythonDebug {
+    inputs.dir "app"
+    inputs.dir "app_packages"
     outputs.dir "build/intermediates/classes/debug/python"
     doLast {
         exec {
@@ -22,6 +24,8 @@ task buildPythonDebug {
 }
 
 task buildPythonRelease {
+    inputs.dir "app"
+    inputs.dir "app_packages"
     outputs.dir "build/intermediates/classes/release/python"
     doLast {
         exec {
