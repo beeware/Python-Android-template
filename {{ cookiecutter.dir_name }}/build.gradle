@@ -10,6 +10,7 @@ buildscript {
 }
 
 task buildPythonDebug {
+    outputs.dir "build/intermediates/classes/debug/python"
     doLast {
         exec {
             commandLine "voc -v -p app -o build/intermediates/classes/debug app".split()
@@ -21,6 +22,7 @@ task buildPythonDebug {
 }
 
 task buildPythonRelease {
+    outputs.dir "build/intermediates/classes/release/python"
     doLast {
         exec {
             commandLine "voc -v -p app -o build/intermediates/classes/release app".split()
@@ -60,9 +62,12 @@ android {
 }
 
 project.afterEvaluate {
-    packageDebug.dependsOn buildPythonDebug
-    packageRelease.dependsOn buildPythonRelease
     run.dependsOn installDebug
+}
+
+android.applicationVariants.all {
+    def genTask = it.buildType.debuggable ? buildPythonDebug : buildPythonRelease
+    it.registerPreJavacGeneratedBytecode(genTask.outputs.files)
 }
 
 repositories {
