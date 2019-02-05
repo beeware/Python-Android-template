@@ -9,27 +9,33 @@ buildscript {
     }
 }
 
-task buildPythonDebug << {
-    exec {
-        commandLine "voc -v -p app -o build/intermediates/classes/debug app".split()
-    }
-    exec {
-        commandLine "voc -v -p app_packages -o build/intermediates/classes/debug app_packages".split()
-    }
-}
-
-task buildPythonRelease << {
-    exec {
-        commandLine "voc -v -p app -o build/intermediates/classes/release app".split()
-    }
-    exec {
-        commandLine "voc -v -p app_packages -o build/intermediates/classes/release app_packages".split()
+task buildPythonDebug {
+    doLast {
+        exec {
+            commandLine "voc -v -p app -o build/intermediates/classes/debug app".split()
+        }
+        exec {
+            commandLine "voc -v -p app_packages -o build/intermediates/classes/debug app_packages".split()
+        }
     }
 }
 
-task run << {
-    exec {
-        commandLine "adb shell am start -n {{ cookiecutter.bundle }}.{{ cookiecutter.app_name }}/android.{{ cookiecutter.class_name }}".split()
+task buildPythonRelease {
+    doLast {
+        exec {
+            commandLine "voc -v -p app -o build/intermediates/classes/release app".split()
+        }
+        exec {
+            commandLine "voc -v -p app_packages -o build/intermediates/classes/release app_packages".split()
+        }
+    }
+}
+
+task run {
+    doLast {
+        exec {
+            commandLine "adb shell am start -n {{ cookiecutter.bundle }}.{{ cookiecutter.app_name }}/android.{{ cookiecutter.class_name }}".split()
+        }
     }
 }
 
